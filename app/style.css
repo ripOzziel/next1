@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+#boton{
+  background-color: #285aeb;
+}
+.card {
+    flex: 1 1 40%;
+    max-width: 1060px;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    background-image: 
+      linear-gradient(85deg, #434343, #262626);
+    padding: 20px;
+    box-shadow: -5px 0 16px 22px
+    rgba(0,0,0,0.5);
+    border-radius: 8px;
+    transition: transform,250ms;
+  }
+  .card-group{
+    width: 100%;
+    display: flex;
+    column-gap: 16px;
+    padding: 50px;
+    /*display: flex;*/
+  }
+  .card:not(:first-child){
+    margin-left: -130px;
+  }
+
+  .card:hover{
+    transform: translate(-8px,-16px)
+    rotate(3deg);
+  }
+  .card:hover ~ .card{
+    transform: translateX(130px);
+  }
+  .button {
+    position: relative;
+    display: inline-block;
+    width: 7.5rem;
+    height: 3rem;
+    background-image: linear-gradient(90deg, #434343, #262626);
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition-property: width, border-radius;
+    transition-duration: 0.25s;
+    transition-delay: 0.5s;
+}
+.button:focus {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.button > * {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    transition: opacity 0.25s;
+}
+
+.button span {
+    transition-delay: 0.75s;
+}
+
+.button:focus span {
+    opacity: 0;
+    transition-delay: 0.15s;
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  width: 7.5rem;
+  height: 3rem;
+  background-image: linear-gradient(90deg, #434343, #262626);
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition-property: width, border-radius;
+  transition-duration: 0.25s;
+  transition-delay: 0.5s;
+}
