@@ -1,10 +1,9 @@
 'use client'
 import React, { useState } from 'react';
 
-const mensaje = document.createElement('p')
-mensaje.id="mensaje"
 const ejercicio03 = () => {
     const [inputValue, setInputValue] = useState(''); // Estado para capturar el valor del cuadro de entrada
+    const [mensaje, setMensaje] = useState(''); // Estado para capturar el mensaje
 
     const analizar = () => {
       class Automata {
@@ -17,10 +16,11 @@ const ejercicio03 = () => {
           [5,5,5]
         ];
         constructor() {
+
         }
   
         inicio(p) {
-            mensaje.text=""
+            setMensaje('')
             let i = 0;
             const a = /a/i
             const b = /b/i
@@ -45,42 +45,30 @@ const ejercicio03 = () => {
             //if (/[^a|^b]/i.test(p)) caracter =2
             
             if (estado === 4) {
-              console.log("es aceptable");
-              mensaje.textContent= "Cadena aceptable"
-              mensaje.className="text-green-500 text-xl cursor-pointer"
-              const ver = document.getElementById('ver')
-              if(ver){
-                ver.appendChild(mensaje)
-              }
+              setMensaje({
+                texto: 'Cadena Valida',
+                className: 'text-green-500 text-xl cursor-pointer',
+              });
+            } else if (estado === 0 || estado === 1 || estado === 2 || estado === 3) {
+              setMensaje({
+                texto: 'Cadena Invalida',
+                className: 'text-red-500 text-xl cursor-pointer',
+              });
+            } else if (estado === 5) {
+              setMensaje({
+                texto: 'Cadena invalida, simbolo fuera del alfabeto!',
+                className: 'text-red-500 text-xl cursor-pointer',
+              });
             }
-            if (estado === 0||estado===1||estado === 2||estado === 3){
-              console.log("Error");
-              mensaje.textContent= "Cadena invalida"
-              mensaje.className="text-red-500 text-xl cursor-pointer"
-              const ver = document.getElementById('ver')
-              if(ver){
-                ver.appendChild(mensaje)
-              }
-            }
-            if(estado ===5){
-              mensaje.textContent= "Cadena invalida, simbolo fuera del alfabeto!"
-              mensaje.className="text-red-500 text-xl cursor-pointer"
-              const ver = document.getElementById('ver')
-             if(ver){
-               ver.appendChild(mensaje)
-             }
-            }
-            mensaje.addEventListener("click", function(){
-              mensaje.textContent=""
-              setInputValue('');
-            })
-    
-    
         }
       }
   
       const obj = new Automata();
       obj.inicio(inputValue); // Pasar el valor del cuadro de entrada a la función de análisis
+    };
+    const handleClearMessage = () => {
+      setMensaje({ texto: '', className: '' });
+      setInputValue('');
     };
   return (
     <div>
@@ -96,7 +84,17 @@ const ejercicio03 = () => {
     <div className='text-center'>
     <button className=' text-gray-200 w-40 rounded-lg text-center h-12 button' onClick={analizar}><span>Analiza la entrada</span></button> {/* Llama a la función analizar al hacer clic */}
     </div>
-    <div id='ver' className='text-center py-8'></div>
+    <div id='ver' className='text-center py-5'>
+        {mensaje.texto && (
+          <p
+            id='mensaje'
+            className={mensaje.className}
+            onClick={handleClearMessage}
+          >
+            {mensaje.texto}
+          </p>
+        )}
+      </div>
   </div>
   )
 }
